@@ -81,7 +81,7 @@ void propogate(int num, int start, int end, ll mul){
 
 void build(int num, int start, int end){
     if(start == end){
-        segtree[num].val.init(a[start]);
+        segtree[num].init(a[start]);
         return;
     }
     int lc = num + num + 1, rc = lc + 1;
