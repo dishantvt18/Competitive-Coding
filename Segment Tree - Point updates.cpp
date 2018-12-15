@@ -58,6 +58,7 @@ struct node{
     }
 
     void no_use() {
+        //Fill up the values that do not affect the answer.
         val = LLONG_MIN;
     }
 };

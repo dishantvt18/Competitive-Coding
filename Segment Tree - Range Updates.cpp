@@ -52,6 +52,10 @@ struct node{
         lazy = 0;
     }
 
+    void init(int x){
+        val = x;
+    }
+
     void merge(node &l, node &r){
         val = l.val + r.val;
     }
@@ -77,7 +81,7 @@ void propogate(int num, int start, int end, ll mul){
 
 void build(int num, int start, int end){
     if(start == end){
-        segtree[num].val = a[start];
+        segtree[num].val.init(a[start]);
         return;
     }
     int lc = num + num + 1, rc = lc + 1;
@@ -90,11 +94,14 @@ void build(int num, int start, int end){
 //Range update. Implemented : add p in range l, r in O(logn).
 void update(int num, int start, int end, int l, int r, ll p){
     if(segtree[num].lazy !=0){
+        //If current node has updates pending, finish them first and pass on the "laziness" to the children.
         propogate(num, start, end, segtree[num].lazy);
         segtree[num].lazy = 0;
     }
     if(start > end || start > r || end < l) return;
     if(start >= l && end <= r){
+        //If current node is fully within range, update it(lazy won't be changed here!!!).
+        //Pass the laziness to children.
         propogate(num, start, end, p);
         return;
     }
@@ -113,6 +120,7 @@ node query(int num, int start, int end, int qs, int qe){
         return ret;
     }
     if(segtree[num].lazy != 0){
+        //If current node has updates pending, finish them first and pass on the "laziness" to the children.
         propogate(num, start, end, segtree[num].lazy);
         segtree[num].lazy = 0;
     }

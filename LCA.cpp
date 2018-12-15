@@ -54,7 +54,7 @@ void dfs(int src, int par, int _depth = 0)
     }
 }
  
-/* Use zero based indexing on graphs to use LCA function */
+/* Use zero based indexing on trees to use LCA function */
 int LCA(int u, int v) {
     if(depth[u] < depth[v]) swap(u,v);
     int diff = depth[u] - depth[v];
@@ -87,6 +87,7 @@ int main() {
         adj[v].pb(u);
     }
     dfs(0, -1);
+    memset(pa, -1, sizeof(pa));
     for(int i=1; i<LOGN; i++)
         for(int j=0; j<n; j++)
             if(pa[i-1][j] != -1)

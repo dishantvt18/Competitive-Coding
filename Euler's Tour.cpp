@@ -31,61 +31,31 @@ typedef pair<int,int> pii;
 const ll mod = (ll)1e9 + 7;
 const ll inf = (ll)1e16;
 const ld eps = 1e-12;
-const ll N = (int)1e5 + 5;
+const ll N = (int)4e5 + 5;
 const ll LOGN = 19;
 const ld PI = 3.14159265358979323846;
 inline ll mul(ll a, ll b, ll m = mod) { return (ll)(a * b) % m;}
 inline ll add(ll a, ll b, ll m = mod) { a += b; if(a >= m) a -= m; if(a < 0) a += m; return a;}
 inline ll power(ll a, ll b, ll m = mod) { if(b == 0) return 1; if(b == 1) return (a % m); ll x = power(a, b / 2, m); x = mul(x, x, m); if(b % 2) x = mul(x, a, m); return x;}
 
-vector< pair<int, pair<int,int> > > edges;
-int par[N], sz[N];
+/* Check for details : https://codeforces.com/contest/620/submission/46958465
+ * The arrays st and ft denote start time and finish time of node.
+ * Mapper[i] represents node which has start time of i.
+ * For segment tree update and query use (0, 0, timer - 1, st[u], ft[u] - 1,..)
+ */
 
-struct DSU{
-    void init()
-    {
-        f(i, N) {
-            par[i] = i;
-            sz[i] = 1;
-        }
-    }
+int n, timer;
+vector<int> adj[N];
+int st[N], ft[N], mapper[N];
 
-    int find(int x){
-        while(par[x] != x)
-            x = par[x];
-        return x;
+void dfs(int src = 0, int par = -1){
+    mapper[timer] = src;
+    st[src] = timer++;
+    for(int i : adj[src]){
+        if(i == par) continue;
+        dfs(i, src);
     }
-
-    void merge(int x, int y) {
-        int u = find(x);
-        int v = find(y);
-        if (sz[u] <= sz[v])
-        {
-            par[u] = par[v];
-            sz[v] += sz[u];
-        }
-        else
-        {
-            par[v] = par[u];
-            sz[u] += sz[v];
-        }
-    }
-};
-
-ll kruskal()
-{
-    ll ret = 0ll;
-    DSU dsu;
-    dsu.init();
-    for(auto it : edges)
-    {
-        int w = it.first, u = it.second.first, v = it.second.second;
-        int par_u = dsu.find(u), par_v = dsu.find(v);
-        if(par_u == par_v) continue;
-        ret += w;
-        dsu.merge(u,v);
-    }
-    return ret;
+    ft[src] = timer;
 }
 
 int main() {
@@ -95,15 +65,15 @@ int main() {
         freopen("C:\\Users\\Dishant\\Desktop\\Collection-DEV c++\\input.txt", "r", stdin);
         freopen("C:\\Users\\Dishant\\Desktop\\Collection-DEV c++\\output.txt", "w", stdout);
     }
-    int n, m;
-    cin>>n>>m;
-    f(i, m)
-    {
-        int u, v, w;
-        cin>>u>>v>>w;
-        edges.pb({w,{u,v}});
+    cin>>n;
+    f(i, n - 1){
+        int u, v;
+        cin>>u>>v;
+        u--, v--;
+        adj[u].pb(v);
+        adj[v].pb(u);
     }
-    sort(all(edges));
-    cout<<kruskal()<<endl;
+    dfs();
+
     return 0;
 }

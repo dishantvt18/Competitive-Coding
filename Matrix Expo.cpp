@@ -49,6 +49,15 @@ struct Matrix
     Matrix(vector< vector<ll> > values): mat(values), n_rows(values.size()),
                                          n_cols(values[0].size()) {}
 
+    Matrix(int row  = 1, int col  = 1){
+        n_rows = row;
+        n_cols = col;
+        f(i, n_rows){
+            vector<ll> put(n_cols, 0);
+            mat.pb(put);
+        }
+    }
+
     void print()
     {
         cout<<"-----------------------------------\n";
