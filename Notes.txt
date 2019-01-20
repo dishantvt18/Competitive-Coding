@@ -9,4 +9,18 @@ Use Euler when queries and updates are related to subtree of some vertex v.
 2. Euler tour + Segtree
    https://codeforces.com/contest/620/submission/46958465
 
-3. 
+
+Graphs :
+
+** DSU(MST application) : Brilliant question - https://codeforces.com/contest/1081/problem/D
+    How to solve? Construct a MST. It is clear that the maximum "cost" of path between any two nodes will always be present in MST. So, run Prim's algo from any spcl node. We get the answer : https://codeforces.com/contest/1081/submission/47148263
+    Alternate way : Check editorial - Talks about DSU!
+
+    Similar and good problems: Sorting  + DSU => https://codeforces.com/contest/437/problem/D and KOICOST on SPOJ.
+
+Persistent Segment Tree:
+	Check Geeks and Anudeep's blog for understanding.
+	Problem 1: https://www.codechef.com/problems/SEGSUMQ (Check editorial and tester's solution -> Brilliant explanation)
+	Lazy in persistence :- Comment in https://discuss.codechef.com/questions/101647/persistence-made-simple-tutorial 
+						   and https://codeforces.com/contest/1091/submission/47768272 
+	

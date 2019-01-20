@@ -1,0 +1,7 @@
+cerr<<"Time elapsed: "<<1000.0 * clock() / CLOCKS_PER_SEC << " ms.\n";
+
+
+auto start = chrono::steady_clock::now();
+
+auto end = chrono::steady_clock::now();
+cerr<<"Time elapsed: "<<chrono::duration_cast<chrono::milliseconds>(end - start).count()<<" ms"<<endl;    	

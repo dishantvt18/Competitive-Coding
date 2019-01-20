@@ -86,12 +86,13 @@ int main() {
         adj[u].pb(v);
         adj[v].pb(u);
     }
-    dfs(0, -1);
     memset(pa, -1, sizeof(pa));
-    for(int i=1; i<LOGN; i++)
-        for(int j=0; j<n; j++)
-            if(pa[i-1][j] != -1)
-                pa[i][j] = pa[i-1][pa[i-1][j]];
-
+    dfs(0, -1);
+    for(int i=1; i<LOGN; i++) {
+        for(int j=0; j<n; j++) {
+            if(pa[i-1][j] != -1) pa[i][j] = pa[i-1][pa[i-1][j]];
+        }
+    }
+    
     return 0;
 } 

@@ -51,9 +51,8 @@ struct DSU{
     }
 
     int find(int x){
-        while(par[x] != x)
-            x = par[x];
-        return x;
+        if(x == par[x]) return x;
+        return par[x] = find(par[x]);
     }
 
     void merge(int x, int y) {

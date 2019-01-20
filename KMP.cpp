@@ -38,63 +38,30 @@ inline ll mul(ll a, ll b, ll m = mod) { return (ll)(a * b) % m;}
 inline ll add(ll a, ll b, ll m = mod) { a += b; if(a >= m) a -= m; if(a < 0) a += m; return a;}
 inline ll power(ll a, ll b, ll m = mod) { if(b == 0) return 1; if(b == 1) return (a % m); ll x = power(a, b / 2, m); x = mul(x, x, m); if(b % 2) x = mul(x, a, m); return x;}
 
+/* Source : https://www.youtube.com/watch?v=GTJr8OvyEVQ
+ * KMP algo - Checks whether pattern t is present in text s.
+ * Uses : https://cp-algorithms.com/string/prefix-function.html
+ */
+
+string s, t;
 int n, m;
-int par[N], sz[N], dist[N];
+int lps[N];
 
-struct DSU{
-    void init(int n)
-    {
-        f(i, n) {
-            par[i] = i;
-            sz[i] = 1;
+bool KMP(){
+    int ptr = 0;
+    f(i, n){
+        if(s[i] == t[ptr]) {
+            ptr++;
+            if(ptr == m) return true;
+            continue;
+        }
+        if(ptr != 0){
+            ptr = lps[ptr - 1];
+            i--;
         }
     }
-
-    /* dist[u] will contain distance of u from the **Set Representive** and it will directly be linked to it after this method is called.
-     * i.e. par[u] = Set Representive and all other info will be lost. All nodes in between u and Representive will also be updated in same way.
-     * For avoiding this use the below commented code.
-        int get_dist(int x)
-        {
-            int ret = 0;
-            while(par[x] != x)
-            {
-                ret += dist[x];
-                x = par[x];
-            }
-            return ret;
-        }
-     */
-    void get_dist(int x)
-    {
-        if(x == par[x]) return;
-        get_dist(par[x]);
-        dist[x] += dist[par[x]];
-        par[x] = par[par[x]];
-    }
-
-    int find(int x){
-        if(x == par[x]) return x;
-        return par[x] = find(par[x]);
-    }
-
-    void merge(int x, int y) {
-        int u = find(x);
-        int v = find(y);
-        if (u == v)
-        {
-            return;
-        }
-        if (sz[u] <= sz[v]) {
-            par[u] = par[v];
-            sz[v] += sz[u];
-        }
-        else
-        {
-            par[v] = par[u];
-            sz[u] += sz[v];
-        }
-    }
-};
+    return false;
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -103,7 +70,19 @@ int main() {
         freopen("C:\\Users\\Dishant\\Desktop\\Collection-DEV c++\\input.txt", "r", stdin);
         freopen("C:\\Users\\Dishant\\Desktop\\Collection-DEV c++\\output.txt", "w", stdout);
     }
-    DSU dsu;
-    
+    cin>>s>>t;
+    n = s.length(), m = t.length();
+    int ptr = 0;
+    rep(i, 1, m - 1){
+        while(ptr){
+            if(t[ptr] == t[i]) break;
+            ptr = lps[ptr - 1];
+        }
+        if(t[ptr] == t[i]) lps[i] = ++ptr;
+    }
+    if(KMP()){
+        cout<<"YES\n";
+    }
+    else cout<<"NO\n";
     return 0;
 }
