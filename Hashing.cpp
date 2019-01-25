@@ -38,52 +38,50 @@ inline ll mul(ll a, ll b, ll m = mod) { return (ll)(a * b) % m;}
 inline ll add(ll a, ll b, ll m = mod) { a += b; if(a >= m) a -= m; if(a < 0) a += m; return a;}
 inline ll power(ll a, ll b, ll m = mod) { if(b == 0) return 1; if(b == 1) return (a % m); ll x = power(a, b / 2, m); x = mul(x, x, m); if(b % 2) x = mul(x, a, m); return x;}
 
-ll inv[N], P = 31;
+/* 
+ * String Hashing - b1 and b2 are base. They should be prime and greater than range of characters in input string.
+ * Implementation details - https://codeforces.com/contest/182/submission/48936522
+ */
+const int b1 = 31, b2 = 53;
+const ll mod1 = (ll)1e9 + 7, mod2 = (ll)1e9 + 9;
 
-void pre()
-{
-    ll temp=1;
-    for(int i=0;i<N;i++)
-    {
-        inv[i]=mul(temp, mod - 2);
-        temp=(temp * P)%mod;
+struct shash{
+    vector<ll> h1, h2, inv1, inv2;
+
+    void init(int n) {
+        h1.resize(n, 0);
+        h2.resize(n, 0);
+        inv1.resize(n, 0);
+        inv2.resize(n, 0);
     }
-}
 
-struct Hash
-{
-    vector<ll> hashs;
-    vector<ll> pows;
-
-    ll P;
-    ll MOD;
-
-    Hash(string &s,ll P,ll MOD) : P(P),MOD(MOD)
-    {
-        ll n=s.size();
-        pows.resize(n+1,0);
-        hashs.resize(n+1,0);
-
-        pows[0]=1;
-        for(int i=1;i<=n;i++)
-            pows[i]=(pows[i-1]*P)%MOD;
-
-        hashs[0]=s[0];
-        for(int i=1;i<n;i++)
-        {
-            hashs[i]=(hashs[i-1] + (s[i])*pows[i])%MOD ;
+    shash(string &s) {
+        int n = s.length();
+        init(n);
+        ll bp1 = 1, bp2 = 1;
+        f(i, n){
+            h1[i] = mul((s[i] - 'a' + 1), bp1, mod1);
+            h2[i] = mul((s[i] - 'a' + 1), bp2, mod2);
+            if(i != 0) {
+                h1[i] = add(h1[i], h1[i - 1], mod1);
+                h2[i] = add(h2[i], h2[i - 1], mod2);
+            }
+            inv1[i] = power(bp1, mod1 - 2, mod1);
+            inv2[i] = power(bp2, mod2 - 2, mod2);
+            bp1 = mul(bp1, b1, mod1);
+            bp2 = mul(bp2, b2, mod2);
         }
     }
 
-    ll get_hash(ll l,ll r)
-    {
-        ll ans=hashs[r];
-        if(l!=0)
-        {
-            ans=(ans-hashs[l-1]+MOD)%MOD;
-            ans=(ans*inv[l])%MOD;
+    pair<ll, ll> get_hash(int l, int r){
+        ll ff = h1[r], ss = h2[r];
+        if(l != 0){
+            ff = add(ff, -h1[l - 1], mod1);
+            ff = mul(ff, inv1[l], mod1);
+            ss = add(ss, -h2[l - 1], mod2);
+            ss = mul(ss, inv2[l], mod2);
         }
-        return ans;
+        return {ff, ss};
     }
 };
 
@@ -95,6 +93,6 @@ int main() {
         freopen("C:\\Users\\Dishant\\Desktop\\Collection-DEV c++\\input.txt", "r", stdin);
         freopen("C:\\Users\\Dishant\\Desktop\\Collection-DEV c++\\output.txt", "w", stdout);
     }
-    
+
     return 0;
 }
