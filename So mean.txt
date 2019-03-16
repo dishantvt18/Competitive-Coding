@@ -1,0 +1,36 @@
+Dishant likes solving puzzles. Today he came across this one:
+
+Given a tree where each node has a value assigned to it, find the maximum mean that can be obtained by considering values of any k-connected component of the given tree. 
+
+A k-connected component in a tree is a subtree of the given tree which contains exactly k nodes.
+
+You need to output the floor value of maximum mean that can be obtained for all possible values of k. Can you help him solve this puzzle?
+
+For information on mean visit this link.
+
+Input:
+
+The first line contains a single integer n denoting the total number of nodes in the tree. The next n - 1 lines contains 2 space seperated integers u and v denoting there is an edge between the two nodes. The last line contains n space seperated integers which denote values assigned to each node. Lets denote this by c[N].
+
+Output:
+
+Output n space seperated integer where kth integer denotes maximum mean for k-connected componets. (1 <= k <= N)
+
+Constraints:
+
+1 <= N <= 5 x 103
+
+0 <= u, v < N
+
+-105 <= c[i] <= 105  for all valid i
+
+
+
+
+1-connected components: Every node in itself is 1-connected component of given tree. Hence, the answer will be 5.
+
+2-connected components: All the two connected components are : (0, 1), (0, 2) and (0, 3) whose mean values are 3.5, 4, 2.5 respectively. Since we are interested in floor values, mean values turn out to be 3, 4 and 2 out of which we select 4 as it is maximum.
+
+3-connected components: All the three connected components are : (0, 1, 2), (0, 1, 3) and (0, 2, 3) whose mean values are 3.33, 2.33 and 2.67 respectively. Taking floor values, it turns out to be 3, 2 and 2. Thus, our answer will be 3.
+
+4-connected components: There is only a single 4-connected component i.e. the whole tree. Thus, answer turns out to be 3.

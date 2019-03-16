@@ -1,5 +1,4 @@
 Tree Related : 
-
 Use HLD when required to update something in path between u and v and query related to it.
 Use Euler when queries and updates are related to subtree of some vertex v.
 
@@ -8,7 +7,7 @@ Use Euler when queries and updates are related to subtree of some vertex v.
 
 2. Euler tour + Segtree
    https://codeforces.com/contest/620/submission/46958465
-
+You can usually use presum when dealing with Euler + segtree and avoid using segtree(because st[u] -> ft[u] can be answered as pre[positionOfFT[u]] - pre[positionOfST[u]]). 
 
 Graphs :
 
@@ -24,3 +23,17 @@ Persistent Segment Tree:
 	Lazy in persistence :- Comment in https://discuss.codechef.com/questions/101647/persistence-made-simple-tutorial 
 						   and https://codeforces.com/contest/1091/submission/47768272 
 	
+
+HASHING : 
+	If the time limit is too tight for O(nlogn) solutions to pass, instead of computing inverses we can apply another trick.
+	DO NOT multiply inverses, instead store powers and multiply difference of powers so that we can compare the hash values.
+	Say, if we want to compare hash values of [0, p] and [l, l + p], we can find hash values of [0, p] and [l, l + p] by rolling hash and then muliply power[l] to the hash obtd. of [0, p]. This guarantees we are comparing strings in same power to base.
+	Example : https://www.codechef.com/status/INSQ15_A,dishant_18
+	Ex2 : https://www.codechef.com/viewsolution/23128759
+
+DIGIT DP :
+	Video source and problems: https://www.youtube.com/watch?v=Pa4YwO8B8-w&fbclid=IwAR12ZlK_He2jioU63e5T8cHIGay6nO7W3RXUoU0qqOIBhNJ-8obz9wJ7rw0 
+	Another good source : https://codeforces.com/blog/entry/53960 
+	Template(sort-of) is in Ra-one number and Lucifer numbers problems of SPOJ. Question link is in YouTube video discription and even in blog.
+	NOTE: Nice LCM trick: https://discuss.codechef.com/questions/83350/workchef-editorial
+						  https://www.hackerearth.com/problem/algorithm/sallu-bhai-and-ias-8838ac8d/editorial/
