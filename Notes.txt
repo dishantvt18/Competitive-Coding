@@ -7,7 +7,18 @@ Use Euler when queries and updates are related to subtree of some vertex v.
 
 2. Euler tour + Segtree
    https://codeforces.com/contest/620/submission/46958465
-You can usually use presum when dealing with Euler + segtree and avoid using segtree(because st[u] -> ft[u] can be answered as pre[positionOfFT[u]] - pre[positionOfST[u]]). 
+You can usually use presum when dealing with Euler + segtree and avoid using segtree(because st[u] -> ft[u] can be answered as pre[positionOfFT[u]] - pre[positionOfST[u]]).
+
+DSU on trees: 
+Can be used to handle queries of type : **How many vertices satisfy a particular property in the subtree of v.**
+**Can only be used to answer queries offline. Only works when we have no updates**
+https://codeforces.com/contest/208/problem/E - Check all the approaches. Order of big[bigChild] = true matters! 
+Brilliant problem : https://codeforces.com/contest/375/problem/D
+Solution : https://codeforces.com/contest/375/submission/51476566
+
+Mo's on trees:
+Can be used for both path queries and subtree queries - COOL! 
+//TODO.
 
 Graphs :
 
