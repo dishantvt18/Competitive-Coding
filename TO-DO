@@ -7,3 +7,14 @@ Persistent Segtree.
 Articulation pts and Bridges.
 https://codeforces.com/blog/entry/63823
 https://codeforces.com/blog/entry/44351
+
+
+Movies:
+Pawn Sacrifice
+
+Suits Tracks:
+I tell you I'm sorry - https://www.youtube.com/watch?v=_fkOsmdSM0A
+https://www.youtube.com/watch?v=qoWRs7lXtYE
+https://www.youtube.com/watch?v=f_9NLcyAblY
+
+There are two players playing a game. Initially both have certain amount say player A has x units and player B has y units of money. Each time a player wins, he gets 1 amount of money from other player. The set of game continues until a player has all the money (i.e x+y units) and other player has 0 units. What is the probability that first player wins the set? Output the answer in p/q format.

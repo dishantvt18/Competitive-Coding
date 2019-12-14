@@ -93,6 +93,7 @@ struct NumberTheory{
     {
         if(B == 0)
             return A;
+        
         return Euclid(B,A%B);
     }
 
@@ -236,7 +237,7 @@ struct NumberTheory{
         //Call this in main if multiple queries exist.
         CalculateMinPrime(n);
         vector<int> ret;
-        while(n != 1)
+        while(n != 1)   
         {
             ret.pb(minprime[n]);
             n /= minprime[n];

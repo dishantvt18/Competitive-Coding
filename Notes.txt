@@ -2,7 +2,7 @@ Tree Related :
 Use HLD when required to update something in path between u and v and query related to it.
 Use Euler when queries and updates are related to subtree of some vertex v.
 
-1. HLD + Euler (CF 343D - Water Tree)
+1. HLD + Euler (CF 343D - Water Tree): Used st and ft arrays in their HLD entry and finish time. Cool approach!
    https://codeforces.com/contest/343/submission/46961209
 
 2. Euler tour + Segtree
