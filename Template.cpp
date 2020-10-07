@@ -3,7 +3,7 @@ using namespace std;
 /*#include<ext/pb_ds/assoc_container.hpp>
 #include<ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-/*template <typename T>
+template <typename T>
 using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 */typedef long long ll;
 typedef unsigned long long ull;
@@ -11,6 +11,7 @@ typedef long double ld;
 typedef pair<ll,ll> pl;
 typedef pair<int,int> pii;
 
+#define int ll
 #define LOCAL 0
 #define dbg(x) cout << #x << " is " << x << "\n"
 #define gll(x) scanf("%d",&x)
@@ -38,13 +39,22 @@ inline ll mul(ll a, ll b, ll m = mod) { return (ll)(a * b) % m;}
 inline ll add(ll a, ll b, ll m = mod) { a += b; if(a >= m) a -= m; if(a < 0) a += m; return a;}
 inline ll power(ll a, ll b, ll m = mod) { if(b == 0) return 1; if(b == 1) return (a % m); ll x = power(a, b / 2, m); x = mul(x, x, m); if(b % 2) x = mul(x, a, m); return x;}
 
-int main() {
+void solve() {
+    
+}
+
+int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     if (LOCAL) {
         freopen("C:\\Users\\Dishant\\Desktop\\Collection-DEV c++\\input.txt", "r", stdin);
         freopen("C:\\Users\\Dishant\\Desktop\\Collection-DEV c++\\output.txt", "w", stdout);
     }
-    
+    int t = 1;
+    //cin>>t;
+    for(int test = 1; test <= t; test++) {
+        //cout<<"Case #"<<test<<": ";
+        solve();
+    }
     return 0;
 }
